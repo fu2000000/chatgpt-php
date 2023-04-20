@@ -32,6 +32,17 @@
                 <option value="gpt-3.5-turbo" selected="selected">Chatgpt3.5</option>
                 <option value="gpt-4">Chatgpt4</option>
               </select>
+              <div class="slider-container">
+                  <label for="temperature">Temperature:</label>
+                  <input type="range" min="0.1" max="1" step="0.1" value="0.1" class="slider" id="temperature">
+                  <input type="number" min="0.1" max="1" step="0.1" value="0.1" class="slider-input" id="temperature-input">
+                  <!--<span class="slider-value"><span id="temperature-value">0.1</span></span>-->
+              </div>
+              <label class="switch-container">
+                  <span class="switch-name">连续对话:</span>
+                  <input type="checkbox" id="switch" class="switch">
+                  <label for="switch" class="switch-label"></label>
+              </label>
           <span class="clear-btn" onclick="clearSelection()">清空</span>
           </div>
         </div>

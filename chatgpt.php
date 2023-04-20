@@ -2,7 +2,7 @@
 ini_set('error_reporting',0);        
 if($_POST['prompt']){
     // Array to store messages
-    $messages = array();
+    $switchison = $_POST['switchison'];
     $baseurl = 'https://api.openai.com/v1/chat/completions';
     $apikey = '';//填写你自己的api key
     $model = $_POST['model'];
@@ -15,7 +15,7 @@ if($_POST['prompt']){
     $params['model'] = $model?$model:'gpt-3.5-turbo';//语言模型;
     //$params['messages'][] = ['role' => 'user', 'content' => trim($_POST['prompt'])];//['role' => 'user', 'content' => trim($_POST['prompt']];
     //判断是否有上下文内容
-    if(!empty($c)){
+    if(!empty($c) && $switchison==1){
        foreach($c as $k=>$v){
             if($k%2==0){
                $params['messages'][$k]['role'] = 'user';
@@ -43,9 +43,9 @@ if($_POST['prompt']){
             // You can add more messages as needed
         );
     }
-    
+    $temperature = floatval($_POST['temperature']);
     //$params['max_tokens'] = 256;
-    $params['temperature'] = 0.1;
+    $params['temperature'] = $temperature?$temperature:0.1;
     //$params['stream'] = true;
     //$params['frequency_penalty'] = 0;
     //$params['presence_penalty'] = 0;

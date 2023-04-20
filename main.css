@@ -228,3 +228,117 @@
 .clear-btn:hover {
   color: #333;
 }
+
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slider-container label {
+  margin-right: 10px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+@media (max-width: 768px) {
+  .slider {
+    width: 150px; /* 在屏幕宽度小于768px时，将滑块的宽度设置为150px */
+  }
+}
+
+/*Temperature滑块样式*/
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #0070c0;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #0070c0;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.slider-value {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+#temperature-value {
+  font-weight: bold;
+}
+.slider-input {
+  width: 40px;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  outline: none;
+}
+
+/*连续对话开关样式*/
+.switch-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.switch-name {
+  margin-right: 10px;
+}
+
+.switch {
+  display: none;
+}
+
+.switch-label {
+  display: inline-block;
+  width: 30px;
+  height: 15px;
+  background-color: #ccc;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.switch-label:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.switch:checked + .switch-label {
+  background-color: #7ac142;
+}
+
+.switch:checked + .switch-label:before {
+  transform: translateX(15px);
+}

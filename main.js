@@ -17,7 +17,22 @@ $(document).ready(function() {
       $("#send-btn").trigger("click"); // 触发发送按钮点击事件
     }
   });
-
+  //滑块值处理
+  var slider = $('#temperature');
+  var sliderInput = $('#temperature-input');
+  // 当滑块的值发生变化时，更新滑块值和输入框的值
+  slider.bind('input', function() {
+    var value = slider.val();
+    $('#temperature-value').text(value);
+    sliderInput.val(value);
+  });
+  
+  // 当输入框的值发生变化时，更新滑块值和输入框的值
+  sliderInput.bind('input', function() {
+    var value = sliderInput.val();
+    $('#temperature-value').text(value);
+    slider.val(value);
+  });
   // 添加消息到聊天框
   function addMessage(sender, message) {
     var chatMessages = $("#chat-messages");
@@ -41,23 +56,28 @@ function clearSelection(){
 //获取chatgpt数据
 function getcontent(){
    var allarr = [];
-    $("#chat-messages li .content .message").each(function(){
-        
+   var temperature = $('#temperature-input').val();
+   var isChecked=document.getElementById('switch').checked;
+   $("#chat-messages li .content .message").each(function(){
         allarr.push($(this).text());
-    });
+   });
    layui.use('layer', function(){
       var layer = layui.layer;
-      
         var loading = layer.msg('数据请求中...', {
             icon: 16,
             shade: 0.4,
             time: false //取消自动关闭
         });
-    });
+   });
+   if(isChecked){
+      var switchison = 1; 
+   } else {
+      var switchison = 2;
+   }
    prompt = $("#user-input").val(); 
    model = $("#model").val(); // 获取选中项的值
    allcontent = JSON.stringify(allarr);
-   $.post("chatgpt.php",{prompt:prompt,model:model,allcontent:allcontent},function (data){
+   $.post("chatgpt.php",{prompt:prompt,model:model,allcontent:allcontent,temperature:temperature,switchison:switchison},function (data){
        if(data==''){
            layer.close(layer.index);
            $("#showanswer").html('系统错误，稍后再试！');
